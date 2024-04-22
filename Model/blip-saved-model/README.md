@@ -5,7 +5,11 @@ base_model: Salesforce/blip-vqa-base
 
 # Model Card for Model ID
 
-<!-- Provide a quick summary of what the model is/does. -->
+MedGPT is a state-of-the-art medical vision question-answering model developed to
+accurately interpret complex medical images, such as MRIs and X-rays. The system
+facilitates easier interactions between doctors and patients with medical reports,
+enhancing the understanding of medical imaging in various clinical contexts.
+
 
 
 
@@ -17,13 +21,13 @@ base_model: Salesforce/blip-vqa-base
 
 
 
-- **Developed by:** [More Information Needed]
+- **Developed by:** Pratik Jadhav
 - **Funded by [optional]:** [More Information Needed]
 - **Shared by [optional]:** [More Information Needed]
-- **Model type:** [More Information Needed]
+- **Model type:** VQA
 - **Language(s) (NLP):** [More Information Needed]
-- **License:** [More Information Needed]
-- **Finetuned from model [optional]:** [More Information Needed]
+- **License:** MIT
+- **Finetuned from model [optional]:** Saleforce/blip-vqa-base
 
 ### Model Sources [optional]
 
