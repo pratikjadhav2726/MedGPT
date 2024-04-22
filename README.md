@@ -4,3 +4,9 @@ facilitates easier interactions between doctors and patients with medical report
 enhancing the understanding of medical imaging in various clinical contexts.
 
 Dataset Used : https://huggingface.co/datasets/xmcmic/PMC-VQA
+
+- **Developed by:** Pratik Jadhav
+- **Model type:** VQA
+- **Language(s) (NLP):** pytorch
+- **License:** MIT
+- **Finetuned from model [optional]:** Saleforce/blip-vqa-base
