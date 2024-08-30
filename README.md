@@ -9,5 +9,4 @@ Dataset Used : https://huggingface.co/datasets/xmcmic/PMC-VQA
 - **Model type:** VQA
 - **Language(s) (NLP):** pytorch
 - **License:** MIT
-- **Finetuned from model [optional]:** Saleforce/blip-vqa-base
-- *LLAVA Finetuning code to be pushed soon
+- **Finetuned from model [optional]:** Saleforce/blip-vqa-base ** LLAVA
