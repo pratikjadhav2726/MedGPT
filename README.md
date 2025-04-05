@@ -38,6 +38,31 @@ MedGPT is an advanced multimodal system combining the power of Large Language an
 
 ---
 
+## Compliance & Data Security (HIPAA & GDPR)
+
+- We take data privacy and protection seriously. MedGPT is designed to be compliant with both HIPAA (for U.S. healthcare data) and GDPR (for EU personal data) standards.
+
+- To support this, the infrastructure code for setting up secure cloud environments on AWS and Azure is being uploaded using Infrastructure as Code (IaC) tools. This includes:
+
+ **What’s Included:**
+	•	Scripts to provision:
+	•	Encrypted storage (S3 buckets on AWS, Blob Storage on Azure)
+	•	IAM roles with restricted access and MFA
+	•	Cloud logging and monitoring (CloudTrail, CloudWatch, Azure Monitor)
+	•	Security alerts and threat detection
+	•	Step-by-step tutorials for:
+	•	De-identifying medical data (e.g., removing DICOM metadata)
+	•	Converting images for safe testing
+	•	Implementing breach notifications and audit logging
+	•	Enforcing access control and logging policies
+
+**Requirements to Use:**
+	•	AWS CLI or Azure CLI installed and configured
+	•	Terraform or Bicep (for deploying the infrastructure)
+	•	Admin access to create IAM roles and policies
+	•	Test data must be de-identified before use (DICOM anonymization recommended)
+	•	Team member should be assigned to monitor ongoing GDPR complianc
+
 
 ---
 
