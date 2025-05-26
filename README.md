@@ -4,10 +4,10 @@ This repository contains resources for MedGPT, a project aimed at leveraging mul
 
 **Current State of the Repository:**
 
-*   **Fine-tuned BLIP VQA Model Adapters:** LoRA adapters for a fine-tuned BLIP VQA model are available in the `Model/blip-saved-model/` directory. You can perform inference with these adapters using the `infer_blip.py` script.
-*   **LLaVA Fine-tuning and Inference Scripts:** This repository includes scripts for preparing data (`prepare_llava_data.py`), fine-tuning LLaVA (`train_llava.py`), and performing inference (`infer_llava.py`).
+*   **Fine-tuned BLIP VQA Model Adapters:** LoRA adapters for a fine-tuned BLIP VQA model are available in the `Model/blip-saved-model/` directory. You can perform inference with these adapters using the `src/blip/infer_blip.py` script.
+*   **LLaVA Fine-tuning and Inference Scripts:** This repository includes scripts for preparing data (`src/llava/prepare_llava_data.py`), fine-tuning LLaVA (`src/llava/train_llava.py`), and performing inference (`src/llava/infer_llava.py`).
     *   **Note:** A pre-fine-tuned LLaVA model is *not* included. Users need to prepare datasets (e.g., from [PMC-VQA](https://huggingface.co/datasets/xmcmic/PMC-VQA) or custom data) and run the fine-tuning process using the provided scripts.
-    *   The `infer_llava.py` script can be used with official LLaVA models from Hugging Face or with user-fine-tuned adapters.
+    *   The `src/llava/infer_llava.py` script can be used with official LLaVA models from Hugging Face or with user-fine-tuned adapters.
 
 The overall goal is to facilitate better interactions between healthcare professionals and medical data, ultimately improving diagnostic accuracy and patient care.
 
@@ -20,15 +20,15 @@ This repository provides resources that support or demonstrate the following cap
 - **BLIP VQA Model (Adapters Available):**
     - Enables Visual Question Answering on medical images using fine-tuned LoRA adapters.
     - Fine-tuning was performed using PEFT (LoRA) for efficient adaptation.
-    - Inference can be run using the `infer_blip.py` script with the provided adapters.
+    - Inference can be run using the `src/blip/infer_blip.py` script with the provided adapters.
 
 - **LLaVA (Large Language and Vision Assistant) (Scripts for DIY Fine-tuning):**
     - **Multimodal Understanding (Potential):**
         - Can be fine-tuned to extract insights from both medical images (e.g., MRIs, X-rays) and clinical text data.
         - Aims to provide ChatGPT-like outputs tailored for medical diagnostics.
     - **Sophisticated Model Engineering (Scripts Provided):**
-        - The `train_llava.py` script demonstrates fine-tuning LLaVA using Parameter Efficient Fine-Tuning (PEFT) with LoRA.
-        - This approach optimizes model performance without extensively modifying pre-trained weights. Data preparation for this script is handled by `prepare_llava_data.py`.
+        - The `src/llava/train_llava.py` script demonstrates fine-tuning LLaVA using Parameter Efficient Fine-Tuning (PEFT) with LoRA.
+        - This approach optimizes model performance without extensively modifying pre-trained weights. Data preparation for this script is handled by `src/llava/prepare_llava_data.py`.
     - **Potential Applications (If fine-tuned by user):**
         - Medical image analysis with text-based reporting.
         - Clinical text comprehension and summarization.
@@ -41,7 +41,7 @@ This repository provides resources that support or demonstrate the following cap
 - **Primary Dataset for Fine-tuning Examples:** The fine-tuning examples in this repository were originally based on concepts from the [PMC-VQA dataset](https://huggingface.co/datasets/xmcmic/PMC-VQA).
   - PMC-VQA is a comprehensive dataset designed for vision-based question answering in medical contexts.
   - It includes annotated data combining medical images and text, suitable for training models like BLIP and LLaVA.
-  - Users will need to source this or their own datasets for the fine-tuning scripts (`train_blip.py`, `prepare_llava_data.py`, and `train_llava.py`).
+  - Users will need to source this or their own datasets for the fine-tuning scripts (`src/blip/train_blip.py`, `src/llava/prepare_llava_data.py`, and `src/llava/train_llava.py`).
 
 ---
 
@@ -61,13 +61,19 @@ This repository provides resources that support or demonstrate the following cap
 
 *   `README.md`: This file.
 *   `requirements.txt`: A file listing Python dependencies for the project.
-*   `blip_dataset.py`: Utility script for BLIP VQA dataset handling, used by `train_blip.py`.
-*   `train_blip.py`: Script for fine-tuning the BLIP VQA model with LoRA.
-*   `infer_blip.py`: Script for performing inference with the fine-tuned BLIP LoRA adapters.
-*   `llava_dataset.py`: Utility script for LLaVA dataset preparation (tokenization, prompt formatting), used by `train_llava.py` and `infer_llava.py`.
-*   `prepare_llava_data.py`: Script to process raw LLaVA conversational datasets (e.g., `filtered_dataset.json`) into the required format (`final_data.json`) for training.
-*   `train_llava.py`: Script for fine-tuning the LLaVA model with LoRA.
-*   `infer_llava.py`: Script for performing inference with LLaVA models (base or fine-tuned with LoRA).
+*   `src/`: Directory containing all core Python scripts.
+    *   `src/__init__.py`
+    *   `src/blip/`: Contains scripts related to the BLIP model.
+        *   `src/blip/__init__.py`
+        *   `src/blip/blip_dataset.py`: Utility script for BLIP VQA dataset handling.
+        *   `src/blip/train_blip.py`: Script for fine-tuning the BLIP VQA model with LoRA.
+        *   `src/blip/infer_blip.py`: Script for performing inference with the fine-tuned BLIP LoRA adapters.
+    *   `src/llava/`: Contains scripts related to the LLaVA model.
+        *   `src/llava/__init__.py`
+        *   `src/llava/llava_dataset.py`: Utility script for LLaVA dataset preparation (tokenization, prompt formatting).
+        *   `src/llava/prepare_llava_data.py`: Script to process raw LLaVA conversational datasets.
+        *   `src/llava/train_llava.py`: Script for fine-tuning the LLaVA model with LoRA.
+        *   `src/llava/infer_llava.py`: Script for performing inference with LLaVA models.
 *   `Model/blip-saved-model/`: Directory containing the fine-tuned BLIP VQA LoRA adapters and configuration.
 *   `HIPAA_GDPR_Compliance_MedGPT.pdf`: A document discussing data privacy, security, and compliance considerations.
 *   `Model.zip`: An archive containing a copy of the `Model/blip-saved-model/` directory.
@@ -125,7 +131,7 @@ pip install -r requirements.txt
 This file includes libraries such as `torch`, `transformers`, `peft`, `accelerate`, `bitsandbytes`, `datasets`, `Pillow`, and `tqdm`.
 
 **b. LLaVA Library Installation (Required for LLaVA scripts):**
-The LLaVA scripts (`train_llava.py`, `infer_llava.py`, `llava_dataset.py`, `prepare_llava_data.py`) require the LLaVA package to be installed from its source repository.
+The LLaVA scripts (`src/llava/train_llava.py`, `src/llava/infer_llava.py`, `src/llava/llava_dataset.py`, `src/llava/prepare_llava_data.py`) require the LLaVA package to be installed from its source repository.
 ```bash
 git clone https://github.com/haotian-liu/LLaVA.git
 cd LLaVA
@@ -135,35 +141,35 @@ cd .. # Return to the MedGPT repository root
 **Note:** If you encounter issues, refer to the [official LLaVA repository](https://github.com/haotian-liu/LLaVA) for the latest installation instructions.
 
 **c. For BLIP model scripts:**
-The libraries installed via `requirements.txt` are sufficient for the BLIP scripts (`train_blip.py`, `infer_blip.py`, `blip_dataset.py`).
+The libraries installed via `requirements.txt` are sufficient for the BLIP scripts (`src/blip/train_blip.py`, `src/blip/infer_blip.py`, `src/blip/blip_dataset.py`).
 
 ### 5. Running the Scripts
 
-Python scripts can be run directly from your activated terminal. Use the `--help` flag with any script to see all available command-line options (e.g., `python train_blip.py --help`).
+Python scripts can be run directly from your activated terminal. Use the `--help` flag with any script to see all available command-line options (e.g., `python src/blip/train_blip.py --help`).
 
 *   **Prepare LLaVA data:**
     ```bash
-    python prepare_llava_data.py --input_file path/to/your/filtered_dataset.json --output_file path/to/your/final_data.json --format captions
+    python src/llava/prepare_llava_data.py --input_file path/to/your/filtered_dataset.json --output_file path/to/your/final_data.json --format captions
     ```
 *   **Train BLIP model:**
     ```bash
-    python train_blip.py --data_path path/to/your/train_2.csv --image_dir path/to/your/blip_images --output_dir Model/blip-saved-model-custom
+    python src/blip/train_blip.py --data_path path/to/your/train_2.csv --image_dir path/to/your/blip_images --output_dir Model/blip-saved-model-custom
     ```
 *   **Train LLaVA model:**
     ```bash
-    python train_llava.py --data_path path/to/your/final_data.json --image_dir path/to/your/llava_images --output_dir Model/llava-custom-adapters
+    python src/llava/train_llava.py --data_path path/to/your/final_data.json --image_dir path/to/your/llava_images --output_dir Model/llava-custom-adapters
     ```
 *   **Run BLIP inference:**
     ```bash
-    python infer_blip.py --model_path Model/blip-saved-model --image_path path/to/your/test_image.jpg --question "What does this image show?"
+    python src/blip/infer_blip.py --model_path Model/blip-saved-model --image_path path/to/your/test_image.jpg --question "What does this image show?"
     ```
 *   **Run LLaVA inference (with fine-tuned adapters):**
     ```bash
-    python infer_llava.py --base_model_id liuhaotian/llava-v1.6-mistral-7b --adapter_path Model/llava-custom-adapters --image_file path/to/your/test_image.jpg --prompt "Describe this image in detail."
+    python src/llava/infer_llava.py --base_model_id liuhaotian/llava-v1.6-mistral-7b --adapter_path Model/llava-custom-adapters --image_file path/to/your/test_image.jpg --prompt "Describe this image in detail."
     ```
 *   **Run LLaVA inference (with base model):**
     ```bash
-    python infer_llava.py --model_path_or_id liuhaotian/llava-v1.6-mistral-7b --image_file path/to/your/test_image.jpg --prompt "Describe this image in detail."
+    python src/llava/infer_llava.py --model_path_or_id liuhaotian/llava-v1.6-mistral-7b --image_file path/to/your/test_image.jpg --prompt "Describe this image in detail."
     ```
 
 **Important Data Dependencies:**
@@ -177,9 +183,9 @@ This section outlines the structure and content of the data files required to ru
 
 ### 1. LLaVA Workflow Data
 
-The LLaVA fine-tuning process (`train_llava.py`) relies on data generated by the `prepare_llava_data.py` script.
+The LLaVA fine-tuning process (`src/llava/train_llava.py`) relies on data generated by the `src/llava/prepare_llava_data.py` script.
 
-**a. `filtered_dataset.json` (Input for `prepare_llava_data.py`)**
+**a. `filtered_dataset.json` (Input for `src/llava/prepare_llava_data.py`)**
 
 *   **Origin:** This file is the initial input for the LLaVA data processing pipeline. You would typically need to obtain a dataset like [PMC-VQA](https://huggingface.co/datasets/xmcmic/PMC-VQA) (or a similar conversational/VQA dataset) and reformat it into this structure if it's not already.
 *   **Structure:** A JSON file containing a list of objects. Each object represents a data instance.
@@ -187,41 +193,41 @@ The LLaVA fine-tuning process (`train_llava.py`) relies on data generated by the
     *   `conversations`: (list of objects) Each object represents a turn in a conversation.
         *   `from`: (string) "human" for user turns, "gpt" for assistant turns.
         *   `value`: (string) The text content of the turn.
-*   **Example:** (See previous README versions or script docstrings for JSON example)
+*   **Example:** (Refer to `src/llava/prepare_llava_data.py` docstring for a conceptual example)
 
-**b. `final_data.json` (Output of `prepare_llava_data.py`, Input for `train_llava.py`)**
+**b. `final_data.json` (Output of `src/llava/prepare_llava_data.py`, Input for `src/llava/train_llava.py`)**
 
-*   **Origin:** Generated by `prepare_llava_data.py` (typically using the `--format captions` option).
+*   **Origin:** Generated by `src/llava/prepare_llava_data.py` (typically using the `--format captions` option).
 *   **Structure:** A JSON file containing a list of objects.
     *   `id`: (integer or string) A unique identifier.
     *   `image`: (string) The image filename. Images are expected in the directory specified by `--image_dir` in `train_llava.py`.
     *   `caption`: (string) The target text/description for the LLaVA model to learn.
-*   **Example:** (See previous README versions or script docstrings for JSON example)
+*   **Example:** (Refer to `src/llava/prepare_llava_data.py` docstring for a conceptual example)
 
 **c. `images/` Directory (for LLaVA)**
 
 *   **Content:** Contains all image files referenced in `final_data.json`.
-*   **Location:** The path to this directory is specified via the `--image_dir` argument to `train_llava.py` and `infer_llava.py`.
+*   **Location:** The path to this directory is specified via the `--image_dir` argument to `src/llava/train_llava.py` and `src/llava/infer_llava.py`.
 
-### 2. BLIP Workflow Data (`train_blip.py`)
+### 2. BLIP Workflow Data (`src/blip/train_blip.py`)
 
-The BLIP fine-tuning (`train_blip.py`) uses `blip_dataset.py` and requires:
+The BLIP fine-tuning (`src/blip/train_blip.py`) uses `src/blip/blip_dataset.py` and requires:
 
 **a. CSV Data File (e.g., `train_2.csv`)**
 
-*   **Origin:** This CSV file is specified via the `--data_path` argument to `train_blip.py`.
-*   **Structure:** CSV with a header. Expected columns by `blip_dataset.py`:
+*   **Origin:** This CSV file is specified via the `--data_path` argument to `src/blip/train_blip.py`.
+*   **Structure:** CSV with a header. Expected columns by `src/blip/blip_dataset.py`:
     *   `Figure_path`: Filename/path of the image.
     *   `Caption`: Image caption.
     *   `Question`: Question about the image.
     *   `Answer`: Single character label (e.g., 'A').
     *   `Choice A`, `Choice B`, etc.: Text for multiple-choice options.
-*   **Example Row:** (See previous README versions or script docstrings for CSV example)
+*   **Example Row:** (Refer to `src/blip/blip_dataset.py` docstring for a conceptual example)
 
 **b. `figures/` Directory (for BLIP)**
 
 *   **Content:** Contains all image files referenced in the CSV's `Figure_path` column.
-*   **Location:** Path specified via the `--image_dir` argument to `train_blip.py`.
+*   **Location:** Path specified via the `--image_dir` argument to `src/blip/train_blip.py`.
 
 ### 3. General Advice
 
@@ -233,9 +239,9 @@ The BLIP fine-tuning (`train_blip.py`) uses `blip_dataset.py` and requires:
 
 ## 🔬 BLIP Model - Fine-tuning and Inference Guide
 
-This section provides step-by-step instructions for fine-tuning the BLIP model using `train_blip.py` and then performing inference using `infer_blip.py`.
+This section provides step-by-step instructions for fine-tuning the BLIP model using `src/blip/train_blip.py` and then performing inference using `src/blip/infer_blip.py`.
 
-### I. Fine-tuning the BLIP Model (`train_blip.py`)
+### I. Fine-tuning the BLIP Model (`src/blip/train_blip.py`)
 
 This script adapts a pre-trained BLIP model for a specific medical VQA dataset using PEFT LoRA.
 
@@ -244,10 +250,10 @@ This script adapts a pre-trained BLIP model for a specific medical VQA dataset u
 *   Prepare your data as per the "💾 Data Preparation Guide" (CSV file and `figures/` image directory).
 
 **2. Run the Training Script:**
-*   Execute `train_blip.py` from your terminal.
+*   Execute `src/blip/train_blip.py` from your terminal.
 *   **Example Command:**
     ```bash
-    python train_blip.py \
+    python src/blip/train_blip.py \
         --data_path path/to/your/train_2.csv \
         --image_dir path/to/your/figures \
         --output_dir Model/blip-saved-model-custom \
@@ -255,7 +261,7 @@ This script adapts a pre-trained BLIP model for a specific medical VQA dataset u
         --batch_size 8 \
         --learning_rate 4e-5
     ```
-*   Use `python train_blip.py --help` for all options.
+*   Use `python src/blip/train_blip.py --help` for all options.
 *   **GPU Required.**
 
 **3. Output:**
@@ -266,21 +272,21 @@ This script adapts a pre-trained BLIP model for a specific medical VQA dataset u
 *   **CUDA/GPU Issues:** Ensure correct setup; try reducing `--batch_size`.
 *   **Import Errors:** Verify `requirements.txt` installation.
 
-### II. Performing Inference with the Fine-tuned BLIP Model (`infer_blip.py`)
+### II. Performing Inference with the Fine-tuned BLIP Model (`src/blip/infer_blip.py`)
 
 **1. Prerequisites:**
-*   Successful BLIP fine-tuning (`train_blip.py`).
+*   Successful BLIP fine-tuning (`src/blip/train_blip.py`).
 *   Fine-tuned adapter files in the output directory from training.
 
 **2. Run the Inference Script:**
 *   **Example Command:**
     ```bash
-    python infer_blip.py \
+    python src/blip/infer_blip.py \
         --model_path Model/blip-saved-model \
         --image_path path/to/your/test_image.jpg \
         --question "What are the key findings in this image?"
     ```
-*   Use `python infer_blip.py --help` for options.
+*   Use `python src/blip/infer_blip.py --help` for options.
 
 **3. Output:**
 *   The model's generated answer is printed to the console.
@@ -291,7 +297,7 @@ This script adapts a pre-trained BLIP model for a specific medical VQA dataset u
 
 This section provides step-by-step instructions for preparing data, fine-tuning the LLaVA model, and performing inference.
 
-### I. Data Preparation for LLaVA (`prepare_llava_data.py`)
+### I. Data Preparation for LLaVA (`src/llava/prepare_llava_data.py`)
 
 This script processes an input JSON file (e.g., `filtered_dataset.json`) into `final_data.json` for training.
 
@@ -301,29 +307,29 @@ This script processes an input JSON file (e.g., `filtered_dataset.json`) into `f
 **2. Run the Data Preparation Script:**
 *   **Example Command (for captioning format):**
     ```bash
-    python prepare_llava_data.py \
+    python src/llava/prepare_llava_data.py \
         --input_file path/to/your/filtered_dataset.json \
         --output_file path/to/your/final_data.json \
         --format captions
     ```
-*   Use `python prepare_llava_data.py --help` for options.
+*   Use `python src/llava/prepare_llava_data.py --help` for options.
 
 **3. Output:**
 *   `final_data.json` (or specified name) with `image` and `caption` pairs.
 
-### II. Fine-tuning the LLaVA Model (`train_llava.py`)
+### II. Fine-tuning the LLaVA Model (`src/llava/train_llava.py`)
 
 This script fine-tunes a LLaVA model (e.g., `liuhaotian/llava-v1.6-mistral-7b`) on your prepared custom dataset using PEFT LoRA.
 
 **1. Prerequisites:**
 *   Follow the "⚙️ Setup Guide" (including LLaVA source install).
-*   Prepared `final_data.json` (from `prepare_llava_data.py`).
+*   Prepared `final_data.json` (from `src/llava/prepare_llava_data.py`).
 *   An `images/` directory (or path specified by `--image_dir`) with all images referenced in `final_data.json`.
 
 **2. Run the Training Script:**
 *   **Example Command:**
     ```bash
-    python train_llava.py \
+    python src/llava/train_llava.py \
         --model_id liuhaotian/llava-v1.6-mistral-7b \
         --data_path path/to/your/final_data.json \
         --image_dir path/to/your/llava_images \
@@ -343,31 +349,31 @@ This script fine-tunes a LLaVA model (e.g., `liuhaotian/llava-v1.6-mistral-7b`) 
 *   **File Not Found:** Check `--data_path` and `--image_dir`.
 *   **CUDA/GPU Issues:** Reduce `--batch_size`; ensure correct setup.
 *   **Import Errors for `llava`:** Verify LLaVA source installation.
-*   **Dataset Format:** Check `final_data.json` structure for `llava_dataset.py`.
+*   **Dataset Format:** Check `final_data.json` structure for `src/llava/llava_dataset.py`.
 
-### III. Performing Inference with LLaVA Models (`infer_llava.py`)
+### III. Performing Inference with LLaVA Models (`src/llava/infer_llava.py`)
 
 **1. Prerequisites:**
-*   Completed "⚙️ Setup Guide".
-*   If using fine-tuned adapters, ensure training was successful and you have the adapter path.
+    *   Completed the "⚙️ Setup Guide".
+    *   If using fine-tuned adapters, ensure training was successful and you have the adapter path.
 
 **2. Run the Inference Script:**
 *   **Using a Base Pre-trained LLaVA Model:**
     ```bash
-    python infer_llava.py \
+    python src/llava/infer_llava.py \
         --model_path_or_id liuhaotian/llava-v1.6-mistral-7b \
         --image_file path/to/your/test_image.jpg \
         --prompt "Describe this image in detail."
     ```
 *   **Using Fine-tuned LLaVA LoRA Adapters:**
     ```bash
-    python infer_llava.py \
+    python src/llava/infer_llava.py \
         --base_model_id liuhaotian/llava-v1.6-mistral-7b \
         --adapter_path path/to/your/llava-adapters \
         --image_file path/to/your/test_image.jpg \
         --prompt "What are the key findings in this medical image?"
     ```
-*   Use `python infer_llava.py --help` for all options.
+*   Use `python src/llava/infer_llava.py --help` for all options.
 
 **3. Output:**
 *   The script prints the model's generated text to the console.
@@ -382,7 +388,8 @@ This section provides illustrative examples of how the MedGPT repository's compo
 
 **Scenario:** A healthcare professional reviewing a chest X-ray.
 *   **Input:** Image (`chest_xray_study_01.png`), Question ("Are there any visible signs of pleural effusion...?").
-*   **Process:** Use `infer_blip.py` with the fine-tuned BLIP adapters.
+*   **Process:**
+    1.  The user runs the `src/blip/infer_blip.py` script, providing the path to their fine-tuned model adapters (via `--model_path`), the path to the image (`chest_xray_study_01.png` via `--image_path`), and the question ("Are there any visible signs of pleural effusion in the lower right lung field?" via `--question`).
 *   **Conceptual Output:** "Based on the visual information, there appears to be [...] in the lower right lung field..."
 *   **❗ Disclaimer:** *Model outputs are for research/informational purposes and not a substitute for professional medical advice.*
 
@@ -390,12 +397,14 @@ This section provides illustrative examples of how the MedGPT repository's compo
 
 **Scenario 1: Generating a Descriptive Caption for a Pathology Slide**
 *   **Input:** Image (`pathology_slide_03.tiff`), Prompt ("Describe this microscopic image in detail.").
-*   **Process:** Use `infer_llava.py` with fine-tuned LLaVA adapters.
+*   **Process:**
+    1.  The user employs their fine-tuned LLaVA model by using the `src/llava/infer_llava.py` script with the `--adapter_path` argument pointing to their fine-tuned LLaVA adapters, along with the image path and prompt.
 *   **Conceptual Output:** "This microscopic image displays [detailed description of cellular structures]..."
 
 **Scenario 2: Answering Questions about a Medical Diagram**
 *   **Input:** Image (`anatomical_diagram.svg`), Question ("Which nerve roots form the superior trunk...?").
-*   **Process:** Use `infer_llava.py` with fine-tuned LLaVA adapters.
+*   **Process:**
+    *   Similar to the captioning scenario, the user provides the diagram image and the question to their fine-tuned LLaVA model using the `src/llava/infer_llava.py` script.
 *   **Conceptual Output:** "The superior trunk... is formed by the C5 and C6 nerve roots."
 *   **❗ Disclaimer:** *Model outputs are for research/informational purposes and not a substitute for professional medical advice.*
 

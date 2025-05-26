@@ -5,7 +5,7 @@ from datasets import load_dataset
 from peft import LoraConfig, get_peft_model
 from transformers import TrainingArguments, Trainer
 from llava.model.builder import load_pretrained_model # For loading the base LLaVA model
-from llava_dataset import tokenize_and_create_labels_for_llava # Custom collate function
+from .llava_dataset import tokenize_and_create_labels_for_llava # Custom collate function
 
 def main(args):
     """

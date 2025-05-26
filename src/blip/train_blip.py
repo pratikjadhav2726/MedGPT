@@ -15,7 +15,7 @@ from peft import LoraConfig, get_peft_model
 from datasets import load_dataset
 
 # Import the custom dataset class
-from blip_dataset import VQADataset
+from .blip_dataset import VQADataset
 
 def main(args):
     """
