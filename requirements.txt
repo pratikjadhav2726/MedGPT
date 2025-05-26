@@ -1,0 +1,15 @@
+torch
+torchvision
+torchaudio
+transformers
+datasets
+Pillow
+peft
+accelerate
+bitsandbytes
+tqdm
+# For the LLaVA library (e.g., llava.model.builder, llava.mm_utils),
+# please follow the installation instructions in the README.md to install from source:
+# git clone https://github.com/haotian-liu/LLaVA.git
+# cd LLaVA
+# pip install -e .
