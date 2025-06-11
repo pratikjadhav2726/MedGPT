@@ -3,6 +3,21 @@ import torch
 from PIL import Image
 from transformers import BlipProcessor, BlipForQuestionAnswering
 # from peft import PeftConfig, PeftModel # Potentially not needed if adapters load automatically
+import re
+import logging
+
+# Set up logging for auditability
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+
+def remove_phi(text):
+    if not isinstance(text, str):
+        return text
+    text = re.sub(r"[\w\.-]+@[\w\.-]+", "[EMAIL]", text)
+    text = re.sub(r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b", "[PHONE]", text)
+    text = re.sub(r"\b\d{1,2}/\d{1,2}/\d{2,4}\b", "[DATE]", text)
+    text = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", "[DATE]", text)
+    text = re.sub(r"\b([A-Z][a-z]+ [A-Z][a-z]+)\b", "[NAME]", text)
+    return text
 
 def main(args):
     """
@@ -49,6 +64,12 @@ def main(args):
     # Prepare inputs for the model
     question = args.question
     print(f"Question: {question}")
+
+    # Remove PHI from the question before sending to the model
+    question_no_phi = remove_phi(question)
+    if question != question_no_phi:
+        logging.info("PHI detected and removed from input question before inference.")
+    question = question_no_phi
 
     try:
         # The processor expects a batch of images, so we pass the image in a list
