@@ -91,6 +91,18 @@ This repository provides resources that support or demonstrate the following cap
 
 ---
 
+## 🛡️ Secure & Compliant Deployment (HIPAA, GDPR, SOC2)
+
+To deploy MedGPT in a HIPAA, GDPR, and SOC2 compliant manner, see the following resources:
+
+- [`SECURE_DEPLOYMENT_GUIDE.md`](SECURE_DEPLOYMENT_GUIDE.md): Step-by-step instructions for secure deployment using both Python SDK (boto3) and Terraform, with a compliance checklist.
+- [`secure_deploy.py`](secure_deploy.py): Example Python script using AWS SDK (boto3) to provision encrypted storage, IAM roles, and logging for compliance.
+- [`secure_deploy.tf`](secure_deploy.tf): Terraform template for compliant infrastructure setup (encrypted S3, IAM, CloudTrail, etc.).
+
+These resources are starting points. Review and adapt them for your specific regulatory and organizational requirements. Consult your compliance and security teams before production deployment.
+
+---
+
 ## ⚙️ Setup Guide
 
 This guide provides instructions to set up your environment to run the scripts in this repository.
