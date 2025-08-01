@@ -33,7 +33,16 @@ This repository provides resources that support or demonstrate the following cap
         - Medical image analysis with text-based reporting.
         - Clinical text comprehension and summarization.
         - Assisting doctors with diagnostics and medical decision-making.
+          
+## 🏥 EHR Multimodal RAG Integration
 
+The `EHR_Multimodal_RAG` repo contains research code and resources for Retrieval-Augmented Generation (RAG) on Electronic Health Records (EHR), adapted from [@pratikjadhav2726/Research/EHR_MultimodalRAG](https://github.com/pratikjadhav2726/Research/tree/main/EHR_Multimodal_RAG).
+
+**How to Use:**
+- See `EHR_Multimodal_RAG/README.md` for setup and usage instructions.
+- You can integrate EHR RAG pipelines with MedGPT’s multimodal models for advanced clinical question answering or document search.
+
+**Note:** Ensure all EHR data is de-identified and compliant with HIPAA/GDPR before use.
 ---
 
 ## 📊 Dataset
